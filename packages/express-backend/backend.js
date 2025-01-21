@@ -67,7 +67,7 @@ app.delete("/users/:id", (req, res) => {
         res.status(404).send("User not found.");
   } else {
     users["users_list"].splice(userIndex, 1);
-     res.status(204).send();
+     res.send();
   }
 });
 
@@ -82,7 +82,7 @@ app.get("/users", (req, res) => {
       result = users["users_list"];
     }
   
-    res.send({ users_list: result });
+    res.send(result);
   });
   
 app.get("/users/:id", (req, res) => {
