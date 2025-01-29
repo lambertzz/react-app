@@ -6,6 +6,22 @@ import Form from "./Form";
 function MyApp() {
   const [characters, setCharacters] = useState([
     
+      {
+        name: "Charlie",
+        job: "Janitor"
+      },
+      {
+        name: "Mac",
+        job: "Bouncer"
+      },
+      {
+        name: "Dee",
+        job: "Aspring actress"
+      },
+      {
+        name: "Dennis",
+        job: "Bartender"
+      }
   ]);
 
 
@@ -13,18 +29,8 @@ function MyApp() {
     setCharacters([...characters, person]); // Add the new person to the list
   };
 
-  return (
-    <div>
-      <h1>Character List</h1>
-      <Form handleSubmit={updateList} />
-      <ul>
-        {characters.map((character, index) => (
-          <li key={index}>{character}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+
+
 
 function removeOneCharacter(index) {
     const updated = characters.filter((character, i) => {
@@ -34,14 +40,14 @@ function removeOneCharacter(index) {
   }
 
 
-function MyApp() {
+
   return (
     <div className="container">
       <Table
         characterData={characters}
         removeCharacter={removeOneCharacter}
       />
-      <Form />
+      <Form handleSubmit={updateList}/>
     </div>
   );
 }
