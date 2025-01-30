@@ -2,6 +2,10 @@
 import express from "express";
 import cors from "cors";
 
+const generateRandomId = () => {
+  return Math.random().toString(36).substr(2, 9); // Generates a random alphanumeric ID
+};
+
 const app = express();
 const port = 8000;
 const users = {
@@ -55,22 +59,28 @@ app.use(cors());
 app.use(express.json());
   
   
+
 app.post("/users", (req, res) => {
-    const userToAdd = req.body;
-    addUser(userToAdd);
-    res.send();
-  });
+  const userToAdd = req.body;
+  userToAdd.id = generateRandomId();
+  addUser(userToAdd);
+  res.status(201).json(userToAdd);
+});
+
+
 
 app.delete("/users/:id", (req, res) => {
     const id = req.params["id"];
     const userIndex = users["users_list"].findIndex((user) => user.id === id);
-     if (userIndex === -1) {
+    
+    if (userIndex === -1) {
         res.status(404).send("User not found.");
-  } else {
-    users["users_list"].splice(userIndex, 1);
-     res.send();
-  }
+    } else {
+        users["users_list"].splice(userIndex, 1);
+        res.send(); 
+    }
 });
+
 
 
 app.get("/users", (req, res) => {
