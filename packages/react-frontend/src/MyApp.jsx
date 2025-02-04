@@ -65,13 +65,13 @@ function MyApp() {
 }
 
 
-function removeOneCharacter(id) {
-  fetch(`http://localhost:8000/users/${id}`, {
+function removeOneCharacter(_id) {
+  fetch(`http://localhost:8000/users/${_id}`, {
       method: "DELETE"
   })
   .then(response => {
       if (response.status === 204) {
-          setCharacters(characters.filter(character => character.id !== id));
+          setCharacters(characters.filter(character => character._id !== _id));
       } else {
           throw new Error("Failed delete user");
       }
